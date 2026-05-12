@@ -60,10 +60,3 @@ def city_kpi(city: str):
 
 # Test
 print(city_kpi("Mumbai"))
-git status
-
-git add .
-
-git commit -m "Add ETL + KPI scripts + tests"
-
-git push
