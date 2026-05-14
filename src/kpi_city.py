@@ -2,9 +2,13 @@ import sqlite3
 import os
 
 DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'db', 'analytics.db')
+ALLOWED_CITIES = {"Mumbai", "Delhi", "Pune", "Bangalore"}
 
 def city_kpi(city: str):
     """Calculate KPIs for a given city using parameterized SQL to prevent injection."""
+    if city not in ALLOWED_CITIES:
+        raise ValueError(f"City '{city}' not allowed. Allowed cities: {ALLOWED_CITIES}")
+    
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 

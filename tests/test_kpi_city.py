@@ -22,5 +22,11 @@ def test_city_kpi_injection_attempt():
     # Should return None because the injection string is not a valid city name
     assert result is None
 
+def test_city_kpi_unknown_city():
+    """Test that unknown cities are rejected."""
+    import pytest
+    with pytest.raises(ValueError, match="City 'Chennai' not allowed"):
+        city_kpi("Chennai")
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
