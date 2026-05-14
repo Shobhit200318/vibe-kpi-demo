@@ -17,10 +17,10 @@ def test_city_kpi_happy_path():
     assert 0 <= result[3] <= 1  # churn_rate should be between 0 and 1
 
 def test_city_kpi_injection_attempt():
-    """Test that SQL injection attempt does not return all rows."""
-    result = city_kpi("Mumbai' OR 1=1 --")
-    # Should return None because the injection string is not a valid city name
-    assert result is None
+    """Test that SQL injection attempt is rejected by city allowlist."""
+    import pytest
+    with pytest.raises(ValueError, match="City 'Mumbai' OR 1=1 --' not allowed"):
+        city_kpi("Mumbai' OR 1=1 --")
 
 def test_city_kpi_unknown_city():
     """Test that unknown cities are rejected."""
