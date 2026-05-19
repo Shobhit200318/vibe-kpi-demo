@@ -39,4 +39,7 @@ if __name__ == "__main__":
     city_kpi("Mumbai")
 
     print("\n=== SQL Injection Attempt (should fail or return no data) ===")
-    city_kpi("Mumbai' OR 1=1 --")
+    try:
+        city_kpi("Mumbai' OR 1=1 --")
+    except ValueError as e:
+        print(f"✓ Injection blocked: {e}")
